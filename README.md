@@ -34,7 +34,7 @@ There are various reasons, some better than others, why you might want to be abl
 
 1. **Performance telemetry;** measure client-side performance, e.g. the time between when a user interaction starts and when the server responds with a `PatchElements` event that removes some HTML.
 1. **Security/monitoring;** perhaps you are displaying some sensitive information, such as access tokens, payment information, etc., and want the client to confirm with the server that the content is no longer shown, instead of blindly trusting that a `PatchElements` event was successful.
-1. **Signal cleanup;** you may need the client to delete signals when the only component they are associated with no longer exists on the page (**Disclaimer:** _if you care about following an idiomatic Datastar approach, this is likely not necessary, or may be better accomplished by your server via a `PatchSignals` event_).
+1. **Signal cleanup;** you may need the client to delete signals when the only component they are associated with no longer exists on the page (**Disclaimer:** _if you care about following an idiomatic Datastar approach, this is likely not necessary, or may be better accomplished by your server via a [`PatchSignals` event](https://data-star.dev/reference/sse_events#datastar-patch-signals)_).
 
 ## Documentation
 
@@ -42,6 +42,8 @@ The `data-on-remove` attribute runs [Datastar expressions](https://data-star.dev
 
 - `el`; the element that the `data-on-remove` attribute was attached to. 
 - `parent`; the element that was the parent of the removed node
+
+If the `data-on-remove` attribute is removed from the element prior to the element itself being removed, then the expression will not run.
 
 ### Example
 
@@ -58,8 +60,6 @@ The `data-on-remove` attribute runs [Datastar expressions](https://data-star.dev
 When the button is clicked, this will log `{ el: button, parent: section }` to the console.
 
 > Since the expression is executed _after_ the element has already been removed from the DOM, you cannot access the parent via `el.parentElement`, so it is provided for you by the plugin.
-
-If the `data-on-remove` attribute is removed from the element prior to the element itself being removed, then the expression will not run.
 
 [View live demo examples here](https://threadgold.nz/demos/data-on-remove)
 
