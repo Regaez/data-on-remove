@@ -15,7 +15,11 @@ A custom [Datastar](https://data-star.dev) attribute plugin that runs an express
 
 ## Getting started
 
-The plugin expects you to provide an [import map](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/script/type/importmap) that specifies the location of the `datastar` module. For example:
+There are two ways to install this plugin:
+
+### Method 1: Import Maps (Auto-install)
+
+Provide an [import map](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/script/type/importmap) that specifies the location of the `datastar` module. The plugin will auto-install when loaded:
 
 ```html
 <script type="importmap">
@@ -26,6 +30,18 @@ The plugin expects you to provide an [import map](https://developer.mozilla.org/
   }
 </script>
 <script type="module" src="https://cdn.jsdelivr.net/gh/regaez/data-on-remove@1.0.0/data-on-remove.min.js"></script>
+```
+
+### Method 2: Manual Install
+
+Import both Datastar and the plugin, then call the `install()` function:
+
+```javascript
+import * as datastar from './datastar.js'
+import { install } from './data-on-remove.js'
+
+// Install the plugin
+install(datastar)
 ```
 
 ## Why use this plugin?
